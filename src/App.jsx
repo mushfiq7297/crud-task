@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserList from './components/UserList';
 import AddUser from './components/AddUser';
 import UpdateUser from './components/UpdateUser';
-import Navbar from './components/Navbar'; // Import Navbar component
+import Navbar from './components/Navbar'; 
 
 const App = () => {
   return (
     <Router>
-      <Navbar /> {/* Add Navbar here */}
+      <Navbar /> 
       <Routes>
         <Route path="/" element={<UserList />} />
         <Route path="/add" element={<AddUser />} />

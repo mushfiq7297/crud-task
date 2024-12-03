@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Async thunks for CRUD operations
+
 export const getAllUsers = createAsyncThunk('users/getAll', async () => {
   const response = await axios.get('https://wesoftin-backend.vercel.app/users?sort=asc');
   return response.data;

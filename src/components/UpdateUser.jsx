@@ -8,7 +8,7 @@ const UpdateUser = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users);
 
-  if (!id) return <div>Invalid User ID</div>; // Handle the case where id is undefined
+  if (!id) return <div>Invalid User ID</div>; 
   
   const user = users.find((user) => user._id === id);
   
@@ -36,7 +36,7 @@ const UpdateUser = () => {
       }
     };
   
-    if (!user) {  // Conditional block
+    if (!user) {  
       fetchAndSetUser();
     } else {
       setFormData({
@@ -47,7 +47,7 @@ const UpdateUser = () => {
         gender: user.gender || ''
       });
     }
-  }, [dispatch, id, user]);  // Make sure useEffect is called at the top level
+  }, [dispatch, id, user]);  
   
   
 
@@ -74,7 +74,7 @@ const UpdateUser = () => {
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
       <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Update User</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Name */}
+       
         <div>
           <label htmlFor="name" className="block text-gray-700 font-medium">Name:</label>
           <input
@@ -88,7 +88,7 @@ const UpdateUser = () => {
           />
         </div>
 
-        {/* Email */}
+      
         <div>
           <label htmlFor="email" className="block text-gray-700 font-medium">Email:</label>
           <input
@@ -102,7 +102,6 @@ const UpdateUser = () => {
           />
         </div>
 
-        {/* Phone */}
         <div>
           <label htmlFor="phone" className="block text-gray-700 font-medium">Phone:</label>
           <input
@@ -116,7 +115,7 @@ const UpdateUser = () => {
           />
         </div>
 
-        {/* Address */}
+        
         <div>
           <label htmlFor="address" className="block text-gray-700 font-medium">Address:</label>
           <textarea
@@ -129,7 +128,7 @@ const UpdateUser = () => {
           ></textarea>
         </div>
 
-        {/* Gender */}
+       
         <div>
           <label htmlFor="gender" className="block text-gray-700 font-medium">Gender:</label>
           <select
@@ -145,7 +144,7 @@ const UpdateUser = () => {
           </select>
         </div>
 
-        {/* Submit Button */}
+      
         <div className="text-center">
           <button
             type="submit"

@@ -9,7 +9,7 @@ const AddUser = () => {
     phone: '',
     address: '',
     gender: '',
-    image: '' // Added image field
+    image: '' 
   });
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const AddUser = () => {
       phone: '',
       address: '',
       gender: '',
-      image: '' // Reset image field
+      image: '' 
     });
   };
 
