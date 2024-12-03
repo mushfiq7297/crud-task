@@ -3,31 +3,53 @@ import { useParams } from 'react-router-dom';
 import { getSingleUser, updateUser } from '../redux/userSlice';
 import { useEffect, useState } from 'react';
 
-
-
 const UpdateUser = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users);
 
-  console.log(id); // Log the id to verify it's being extracted correctly
   if (!id) return <div>Invalid User ID</div>; // Handle the case where id is undefined
-
+  
   const user = users.find((user) => user._id === id);
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    gender: ''
+  });
 
   useEffect(() => {
-    if (!user) {
-      dispatch(getSingleUser(id));
+    const fetchAndSetUser = async () => {
+      try {
+        const fetchedUser = await dispatch(getSingleUser(id)).unwrap();
+        setFormData({
+          name: fetchedUser?.name || '',
+          email: fetchedUser?.email || '',
+          phone: fetchedUser?.phone || '',
+          address: fetchedUser?.address || '',
+          gender: fetchedUser?.gender || ''
+        });
+      } catch (err) {
+        console.error('Error fetching user:', err);
+      }
+    };
+  
+    if (!user) {  // Conditional block
+      fetchAndSetUser();
+    } else {
+      setFormData({
+        name: user.name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        address: user.address || '',
+        gender: user.gender || ''
+      });
     }
-  }, [dispatch, id, user]);
-
-  const [formData, setFormData] = useState({
-    name: user?.name || '',
-    email: user?.email || '',
-    phone: user?.phone || '',
-    address: user?.address || '',
-    gender: user?.gender || ''
-  });
+  }, [dispatch, id, user]);  // Make sure useEffect is called at the top level
+  
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +58,14 @@ const UpdateUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUser({ id, user: formData }));
+    dispatch(updateUser({ id, user: formData }))
+      .unwrap()
+      .then(() => {
+        alert('User updated successfully!');
+      })
+      .catch((err) => {
+        console.error('Error updating user:', err);
+      });
   };
 
   if (!user) return <div>Loading...</div>;

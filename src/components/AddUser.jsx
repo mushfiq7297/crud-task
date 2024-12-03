@@ -1,4 +1,3 @@
-
 import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/userSlice';
 import { useState } from 'react';
@@ -9,7 +8,8 @@ const AddUser = () => {
     email: '',
     phone: '',
     address: '',
-    gender: ''
+    gender: '',
+    image: '' // Added image field
   });
 
   const dispatch = useDispatch();
@@ -27,7 +27,8 @@ const AddUser = () => {
       email: '',
       phone: '',
       address: '',
-      gender: ''
+      gender: '',
+      image: '' // Reset image field
     });
   };
 
@@ -94,6 +95,18 @@ const AddUser = () => {
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-medium">Image URL:</label>
+          <input
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={handleChange}
+            placeholder="Enter image URL"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
         </div>
 
         <button
